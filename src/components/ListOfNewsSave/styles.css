@@ -1,0 +1,30 @@
+.containerListSave {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1600px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  padding-right: 30px;
+}
+
+.AppContListSave {
+  display: flex;
+  margin-left: 16px;
+  max-width: 1500px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: thin;
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  padding-right: 40px;
+}
+
+.rowListSave {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
