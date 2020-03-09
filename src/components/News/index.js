@@ -15,12 +15,6 @@ import {
   TextoEtiqueta
 } from './styles'
 import { MdDateRange, MdCloudQueue } from 'react-icons/md'
-import { useLocalStorageMarked } from '../../hooks/useLocalStorageMarked'
-
-const KeylistadoVerMasTarde = 'listadoVerMasTarde'
-let listadover = []
-listadover =
-  JSON.parse(window.localStorage.getItem(KeylistadoVerMasTarde)) || []
 
 export const News = ({
   id,
@@ -28,26 +22,14 @@ export const News = ({
   fecha,
   comentarios,
   titulo,
-  contenido
+  contenido,
+  fueMarcado,
+  setAsMarked
 }) => {
-  const noticia = { id, imagenURL, titulo, contenido }
-  const key = `like-${id}`
-  const [marked, setMarked] = useLocalStorageMarked(key, false)
+  const noticia = { id, imagenURL, titulo, contenido, fueMarcado }
 
-  const setLocalStorage = valueId => {
-    try {
-      if (listadover.filter(notic => notic.id === valueId.id).length === 0) {
-        valueId.fueguardado = !valueId.fueguardado
-        listadover.push(valueId)
-      }
-      window.localStorage.setItem(
-        KeylistadoVerMasTarde,
-        JSON.stringify(listadover)
-      )
-      setMarked(!marked)
-    } catch (e) {
-      console.error(e)
-    }
+  const setLocalStorage = (valueId) => {
+    setAsMarked(valueId)
   }
 
   const fechaObj = new Date(fecha)
@@ -79,8 +61,7 @@ export const News = ({
       </DivButtonMiddle>
       <DivButtonBottom>
         <ButtonLeft> LEER MÁS</ButtonLeft>
-
-        <ButtonRight col={marked} onClick={() => setLocalStorage(noticia)}>
+        <ButtonRight col={fueMarcado} onClick={() => setLocalStorage(noticia.id)}>
           {' '}
           VER MÁS TARDE
         </ButtonRight>

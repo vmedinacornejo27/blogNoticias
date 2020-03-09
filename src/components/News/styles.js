@@ -101,7 +101,23 @@ export const ButtonRight = styled.button`
       }
     `}
 `
-
+export const ButtonNuevo = styled.button`
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 0.5rem 0;
+  margin: 10px 0px 10px 0px;
+  width: 11rem;
+  background: black;
+  color: white;
+  border: 1px solid gray;
+  ${props =>
+    props.estilo === true &&
+    css`
+       {
+        background: rgb(171, 128, 9);
+      }
+    `}
+`
 export const TextoEtiqueta = styled.p`
   margin-left: 10px;
   margin-right: 10px;
