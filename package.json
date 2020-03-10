@@ -13,11 +13,12 @@
     "react-redux": "^7.2.0",
     "react-scripts": "3.3.1",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "npm-run-all -p client server",
-    "client": "set PORT=3004 && react-scripts start",
+    "client": "set PORT=3003 && react-scripts start",
     "server": "json-server --port 3002 --watch db.json",
     "build": "react-scripts build",
     "test": "react-scripts test",

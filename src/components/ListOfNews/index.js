@@ -3,44 +3,25 @@ import './styles.css'
 import { News } from '../News'
 import { MdBookmark } from 'react-icons/md'
 import { Link } from '@reach/router'
+import { fetchNoticias, setNoticiasMarcadas } from '../../redux/actions/noticias'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 class ListOfNews extends React.Component {
-/*
-  state = {
-    data: []
-  };
   componentDidMount() {
-    this.getNews();
+    this.props.fetchNoticias();
   }
-
-  getNews = async () => {
-    let res = await axios.get(`http://10.60.65.28:3000/noticia/listaNoticias`);
-    let { data } = res.data;
-    this.setState({ data: data });
-  };
-*/
-  state = {
-    data: []
-  };
-
-  componentDidMount() {
-    this.getNews();
-  }
-
-  getNews = async () => {
-    let res = await axios.get('http://localhost:3002/noticias/');
-    let { data } = res;
-    //this.setState({ data: data });
-    this.props.dispatch({type: 'LOAD_DATA', noticias: data});
-  };
 
   setAsMarked = (id) => {
-    this.props.dispatch({type: 'SET_NOTICIA_AS_MARKED', id: id })
+    this.props.setNoticiasMarcadas(id)
   }
 
   render () {
+      if (this.props.loading) {
+        return <div>Loading...</div>
+    }
+    if (this.props.error) {
+        return <div style={{ color: 'red' }}>ERROR: {this.props.error}</div>
+    }
     return (
       <div className='container'>
         <Link to='/detailViewSave'>
@@ -66,11 +47,17 @@ class ListOfNews extends React.Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
-    dataNoticias: state.noticias
+    dataNoticias: state.noticias,
+    loading: state.loading,
+    error: state.error,
   }
 }
 
-export default connect(mapStateToProps)(ListOfNews)
+const mapDispatchToProps = {
+   fetchNoticias,
+   setNoticiasMarcadas
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListOfNews)
